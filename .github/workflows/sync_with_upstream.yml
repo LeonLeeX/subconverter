@@ -1,0 +1,27 @@
+name: Sync with Upstream Repository
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 每天UTC时间0点运行，你可以根据需要调整时间
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # 获取完整的历史记录
+
+      - name: Configure git
+        run: |
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
+
+      - name: Sync with Upstream
+        run: |
+          git remote add upstream https://github.com/原作者/仓库名.git
+          git fetch upstream
+          git checkout master # 或其他你的默认分支名
+          git merge upstream/master # 或其他原仓库的默认分支名
+          git push origin master # 推送更新到你的仓库
