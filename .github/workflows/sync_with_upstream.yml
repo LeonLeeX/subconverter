@@ -14,7 +14,10 @@ jobs:
         with:
           fetch-depth: 0 # 获取完整的历史记录
 
-
+      - name: Set Git Config
+        run: |
+          git config --local user.email "admin@leongo.com"
+          git config --local user.name "Leon"
 
       - name: Sync with Upstream
         run: |
