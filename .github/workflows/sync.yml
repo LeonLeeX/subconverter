@@ -9,6 +9,9 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
+      - name: Print GitHub Token Length
+        run: echo "The token length is ${#WORKFLOW}"
+
       - name: Checkout
         uses: actions/checkout@v2
         with:
