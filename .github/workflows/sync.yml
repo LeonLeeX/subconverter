@@ -10,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print GitHub Token Length
-        run: echo "The token length is ${#WORKFLOW}"
+        run: echo "The token length is ${{ secrets.WORK_FLOW }}"
 
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          token: ${{ secrets.WORKFLOW }} # 使用你的 PAT
+          token: ${{ secrets.WORK_FLOW }} # 使用你的 PAT
 
       - name: Set Git Config
         run: |
