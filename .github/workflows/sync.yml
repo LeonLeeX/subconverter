@@ -1,0 +1,29 @@
+name: Sync Fork with Upstream
+
+on:
+  schedule:
+    - cron: '0 * * * *' # 每小时执行一次，你可以根据需要调整
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.WORKFLOW }} # 使用你的 PAT
+
+      - name: Set Git Config
+        run: |
+          git config --local user.email "admin@leongo.com"
+          git config --local user.name "Leon"
+
+      - name: Sync with Upstream
+        run: |
+          git remote add upstream https://github.com/tindy2013/subconverter.git
+          git fetch upstream
+          git checkout master
+          git merge upstream/master
+          git push origin master
